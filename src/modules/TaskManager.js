@@ -1,5 +1,5 @@
 import { useState } from "react"
-import "../../src/index.css"
+import "../index.css"
 function TaskManager() {
   const [Tasks, setTasks] = useState([])
   const [input, setInput] = useState("")
@@ -43,7 +43,7 @@ function TaskManager() {
   return (
     <div className="container">
       <h1>TODO APP</h1>
-      {Tasks.length != 0 ? (
+      {Tasks.length !== 0 && (
         <div className="tasks">
           {Tasks.sort(a =>
             a.isCompleted ? 1 : -1
@@ -104,7 +104,7 @@ function TaskManager() {
             </div>
           ))}
         </div>
-      ) : null}
+      )}
       <form
         onSubmit={event => event.preventDefault()}
         className="add-task"
