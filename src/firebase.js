@@ -2,7 +2,6 @@
 import { initializeApp } from "firebase/app"
 // TODO: Add SDKs for Firebase products that you want to use
 import { getAuth } from "firebase/auth"
-console.log("djas")
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
 const firebaseConfig = {
