@@ -1,9 +1,8 @@
 import React, { useState } from "react"
 import "../index.css"
-import { signInWithEmailAndPassword } from "firebase/auth"
-import auth from "../firebase.js"
+import {userSignIn} from "../userAuth.js"
 import { useNavigate } from "react-router-dom"
-const SignIn = () => {
+const SignIn = ({handleUser}) => {
   const [Email, setEmail] = useState("")
   const [Pass, setPass] = useState("")
   const resetData = () => {
@@ -13,19 +12,9 @@ const SignIn = () => {
   const history = useNavigate()
   const onSubmit = async e => {
     e.preventDefault()
-
-    await signInWithEmailAndPassword(
-      auth,
-      Email,
-      Pass
-    )
-      .then(userCrential => {
-        console.log(userCrential.user)
-        history("/todo")
-      })
-      .catch(error => {
-        alert(error.message)
-      })
+    userSignIn(Email,Pass).then(()=>{
+handleUser(true)
+history("/todo")})
   }
   return (
     <div className="signUp">

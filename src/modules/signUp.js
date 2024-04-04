@@ -1,12 +1,8 @@
-import React, { useState } from "react"
+import React, { useState} from "react"
 import "../index.css"
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth"
-import auth from "../firebase.js"
 import { useNavigate } from "react-router-dom"
-const SignUp = () => {
+import {userSignUp} from "../userAuth.js"
+const SignUp = ({handleUser}) => {
   const [Name, setName] = useState("")
   const [Email, setEmail] = useState("")
   const [Pass, setPass] = useState("")
@@ -15,34 +11,20 @@ const SignUp = () => {
     setEmail("")
     setPass("")
   }
-  
-  const history = useNavigate()
-  const onSubmit = async e => {
-    e.preventDefault()
 
-    await createUserWithEmailAndPassword(
-      auth,
-      Email,
-      Pass
-    )
-      .then(userCrential => {
-        console.log(userCrential.user)
-        history("/todo")
-      })
-      .catch(error => {
-        alert(error.message)
-      })
-    await updateProfile(auth.currentUser, {
-      displayName: Name,
-    })
-      .catch(error => {
-        alert(error.message)
-      })
+  const history = useNavigate()
+  const onSubmit = e => {
+    e.preventDefault()
+    userSignUp(Email, Pass, Name).then(() => {
+      handleUser(true)
+      history("/todo")
+    }).catch((err)=>{
+alert(err.message)})
   }
   return (
     <div className="signUp">
       <h1>Create an Account</h1>
-      <form class="form">
+      <form className="form">
         <div>
           <label>Username</label>
           <input
