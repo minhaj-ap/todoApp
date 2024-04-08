@@ -11,18 +11,12 @@ async function userSignUp(email, password, name) {
     email,
     password
   )
-    .then(() => console.log("created"))
     .catch(error => {
       alert(error.message)
     })
   await updateProfile(auth.currentUser, {
     displayName: name,
   })
-    .then(
-      () => (
-        console.log("updated")
-      )
-    )
     .catch(error => {
       alert(error.message)
     })
@@ -37,10 +31,7 @@ async function userSignIn(email, password) {
   return true
 }
 export async function userLogOut() {
-  await signOut(auth).then(()=>{
-console.log("triggered")
-}
-);
+  await signOut(auth)
   return true;
 }
 

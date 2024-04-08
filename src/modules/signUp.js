@@ -1,26 +1,29 @@
-import React, { useState} from "react"
-import "../index.css"
-import { useNavigate } from "react-router-dom"
-import {userSignUp} from "../userAuth.js"
-const SignUp = ({handleUser}) => {
-  const [Name, setName] = useState("")
-  const [Email, setEmail] = useState("")
-  const [Pass, setPass] = useState("")
+import React, { useState } from "react";
+import "../index.css";
+import { useNavigate } from "react-router-dom";
+import { userSignUp } from "../userAuth.js";
+const SignUp = ({ handleUser }) => {
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Pass, setPass] = useState("");
   const resetData = () => {
-    setName("")
-    setEmail("")
-    setPass("")
-  }
+    setName("");
+    setEmail("");
+    setPass("");
+  };
 
-  const history = useNavigate()
-  const onSubmit = e => {
-    e.preventDefault()
-    userSignUp(Email, Pass, Name).then(() => {
-      handleUser(true)
-      history("/todo")
-    }).catch((err)=>{
-alert(err.message)})
-  }
+  const history = useNavigate();
+  const onSubmit = (e) => {
+    e.preventDefault();
+    userSignUp(Email, Pass, Name)
+      .then(() => {
+        handleUser(true);
+        history("/todo");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
   return (
     <div className="signUp">
       <h1>Create an Account</h1>
@@ -30,9 +33,7 @@ alert(err.message)})
           <input
             type="text"
             value={Name}
-            onChange={e =>
-              setName(e.target.value)
-            }
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div>
@@ -41,9 +42,7 @@ alert(err.message)})
             type="email"
             label="Email"
             value={Email}
-            onChange={e =>
-              setEmail(e.target.value)
-            }
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div>
@@ -51,29 +50,19 @@ alert(err.message)})
           <input
             type="password"
             value={Pass}
-            onChange={e =>
-              setPass(e.target.value)
-            }
+            onChange={(e) => setPass(e.target.value)}
           />
         </div>
         <div className="buttons">
-          <button
-            type="submit"
-            className="save"
-            onClick={onSubmit}
-          >
+          <button type="submit" className="save" onClick={onSubmit}>
             Create Account
           </button>
-          <button
-            type="reset"
-            className="dlt"
-            onClick={resetData}
-          >
+          <button type="reset" className="dlt" onClick={resetData}>
             Reset
           </button>
         </div>
       </form>
     </div>
-  )
-}
-export default SignUp
+  );
+};
+export default SignUp;
